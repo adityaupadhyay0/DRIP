@@ -33,12 +33,22 @@ export default function SearchPage() {
   };
 
   useEffect(() => {
-    fetchProducts(query, selectedAesthetic, selectedCategory);
-  }, [selectedAesthetic, selectedCategory]);
+    fetchProducts('', 'All', 'All');
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     fetchProducts(query, selectedAesthetic, selectedCategory);
+  };
+
+  const handleAestheticChange = (a: string) => {
+    setSelectedAesthetic(a);
+    fetchProducts(query, a, selectedCategory);
+  };
+
+  const handleCategoryChange = (c: string) => {
+    setSelectedCategory(c);
+    fetchProducts(query, selectedAesthetic, c);
   };
 
   return (
@@ -84,11 +94,11 @@ export default function SearchPage() {
                     {AESTHETICS.map(a => (
                       <button
                         key={a}
-                        onClick={() => setSelectedAesthetic(a)}
+                        onClick={() => handleAestheticChange(a)}
                         className={`text-sm px-3 py-1.5 rounded-full text-left transition-all ${
                           selectedAesthetic === a
                           ? 'bg-black dark:bg-white text-white dark:text-black font-bold'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 bg-white dark:bg-black'
                         }`}
                       >
                         {a}
@@ -103,11 +113,11 @@ export default function SearchPage() {
                     {CATEGORIES.map(c => (
                       <button
                         key={c}
-                        onClick={() => setSelectedCategory(c)}
+                        onClick={() => handleCategoryChange(c)}
                         className={`text-sm px-3 py-1.5 rounded-full text-left transition-all ${
                           selectedCategory === c
                           ? 'bg-black dark:bg-white text-white dark:text-black font-bold'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 bg-white dark:bg-black'
                         }`}
                       >
                         {c}

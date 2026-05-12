@@ -68,6 +68,32 @@
   font-family: serif;
 }
 
+/* Y2K / Maximalist Skin */
+[data-skin="y2k"] {
+  --background: #ffecff;
+  --foreground: #ff00ff;
+  --accent: #00ffff;
+  --card: #ffffff;
+  --border: #ff00ff;
+}
+
+[data-skin="y2k"] body {
+  font-family: var(--font-sans);
+}
+
+/* Clean Girl Skin */
+[data-skin="clean-girl"] {
+  --background: #fcf9f6;
+  --foreground: #5c524a;
+  --accent: #d7c9bd;
+  --card: #ffffff;
+  --border: #e8e1da;
+}
+
+[data-skin="clean-girl"] body {
+  font-family: var(--font-sans);
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);

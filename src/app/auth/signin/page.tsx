@@ -1,7 +1,7 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import { Chrome, Apple } from 'lucide-react';
+import { Apple } from 'lucide-react';
 
 export default function SignInPage() {
   return (
@@ -17,7 +17,6 @@ export default function SignInPage() {
             onClick={() => signIn('google', { callbackUrl: '/' })}
             className="flex items-center justify-center gap-3 w-full border border-gray-200 dark:border-gray-700 py-3.5 rounded-2xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
           >
-            <Chrome size={20} />
             <span>Continue with Google</span>
           </button>
 

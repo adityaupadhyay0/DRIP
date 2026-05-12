@@ -620,12 +620,12 @@ AffiliateClick
 
 - [x] Aesthetic detection from behaviour signals
 - [x] Adaptive UI theme system (6 aesthetic skins)
-- [ ] Persona dashboard (user can see + edit their detected profile)
-- [ ] Body fit input (quiz + measurements + optional photo — Phase 2 only quiz + measurements)
-- [ ] Fit-adapted results (size/fit signals influence catalog ranking)
-- [ ] Wardrobe analytics dashboard (color map, gap analysis, outfit potential)
-- [ ] Outfit builder canvas (drag + drop, AI complete)
-- [ ] Save / collection system
+- [x] Persona dashboard (user can see + edit their detected profile)
+- [x] Body fit input (quiz + measurements + optional photo — Phase 2 only quiz + measurements)
+- [x] Fit-adapted results (size/fit signals influence catalog ranking)
+- [x] Wardrobe analytics dashboard (color map, gap analysis, outfit potential)
+- [x] Outfit builder canvas (drag + drop, AI complete)
+- [x] Save / collection system
 
 **Deliverable:** The app feels like it knows you after 10 minutes of use.
 
