@@ -1,10 +1,9 @@
 import { CatalogProduct } from '@/types/product';
 import { v4 as uuidv4 } from 'uuid';
 
-// Mock data generator for Phase 1
-const BRANDS = ['ASOS Design', 'Zara', 'H&M', 'Uniqlo', 'Mango', 'Nike', 'Adidas', 'Levi\'s'];
-const CATEGORIES = ['tops/shirts', 'tops/t-shirts', 'bottoms/trousers', 'bottoms/jeans', 'footwear/sneakers', 'outerwear/jackets'];
-const AESTHETICS = ['minimalist', 'streetwear', 'dark academia', 'y2k', 'clean girl', 'quiet luxury'];
+const BRANDS = ['ASOS Design', 'Zara', 'H&M', 'Uniqlo', 'Mango', 'Nike', 'Adidas', 'Levi\'s', 'New Balance', 'Patagonia'];
+const CATEGORIES = ['tops/shirts', 'tops/t-shirts', 'bottoms/trousers', 'bottoms/jeans', 'footwear/sneakers', 'outerwear/jackets', 'accessories/bags'];
+const AESTHETICS = ['minimalist', 'streetwear', 'dark academia', 'y2k', 'clean girl', 'quiet luxury', 'techwear', 'vintage'];
 
 export function generateMockProduct(id: number): CatalogProduct {
   const brand = BRANDS[id % BRANDS.length];
@@ -30,8 +29,16 @@ export function generateMockProduct(id: number): CatalogProduct {
   };
 }
 
-export async function seedCatalog(count: number = 100) {
+// In-memory cache for the large mock catalog to avoid re-generating on every search
+let cachedCatalog: CatalogProduct[] | null = null;
+
+export async function seedCatalog(count: number = 5000) {
+  if (cachedCatalog && cachedCatalog.length >= count) {
+    return cachedCatalog;
+  }
+
+  console.log(`Generating ${count} mock products...`);
   const products = Array.from({ length: count }, (_, i) => generateMockProduct(i));
-  console.log(`Generated ${products.length} mock products for catalog.`);
+  cachedCatalog = products;
   return products;
 }

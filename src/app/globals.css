@@ -3,22 +3,74 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-card: var(--card);
+  --color-border: var(--border);
 }
 
+/* Default Theme */
 :root {
   --background: #ffffff;
   --foreground: #000000;
+  --accent: #3b82f6;
+  --card: #f9fafb;
+  --border: #e5e7eb;
 }
 
 .dark {
   --background: #000000;
   --foreground: #ffffff;
+  --accent: #60a5fa;
+  --card: #111827;
+  --border: #1f2937;
+}
+
+/* Minimalist / Quiet Luxury Skin */
+[data-skin="minimalist"] {
+  --background: #fdfcfb;
+  --foreground: #1a1a1a;
+  --accent: #8b7355;
+  --card: #ffffff;
+  --border: #f0ede9;
+}
+
+[data-skin="minimalist"] body {
+  font-family: serif;
+}
+
+/* Streetwear / Hypebeast Skin */
+[data-skin="streetwear"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --accent: #ff0000;
+  --card: #0a0a0a;
+  --border: #333333;
+}
+
+[data-skin="streetwear"] body {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+/* Dark Academia Skin */
+[data-skin="dark-academia"] {
+  --background: #2c2420;
+  --foreground: #e0d5c1;
+  --accent: #8b4513;
+  --card: #3a2e29;
+  --border: #4a3c35;
+}
+
+[data-skin="dark-academia"] body {
+  font-family: serif;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }

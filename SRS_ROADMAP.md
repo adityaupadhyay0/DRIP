@@ -600,15 +600,15 @@ AffiliateClick
 
 **Goal:** The intelligence layer. This is the core product.
 
-- [ ] AI provider adapter (Claude primary, OpenAI fallback, Ollama self-host)
-- [ ] Intent search: NL query → outfit blueprint → catalog query → ranked results
-- [ ] Aesthetic classification system (prompt-based v1, embedding-based v2)
-- [ ] Visual inspiration upload: image → clothing graph → catalog matches
-- [ ] Persona engine v1: collect signals, build profile, influence results
-- [ ] Wardrobe upload: photo → vision AI → auto-classified item
+- [x] AI provider adapter (Claude primary, OpenAI fallback, Ollama self-host)
+- [x] Intent search: NL query → outfit blueprint → catalog query → ranked results
+- [x] Aesthetic classification system (prompt-based v1, embedding-based v2)
+- [x] Visual inspiration upload: image → clothing graph → catalog matches
+- [x] Persona engine v1: collect signals, build profile, influence results
+- [x] Wardrobe upload: photo → vision AI → auto-classified item
 - [ ] Outfit compatibility scoring (does this item match this wardrobe?)
-- [ ] pgvector setup + product embeddings indexed
-- [ ] Semantic search (embedding similarity over keyword)
+- [x] pgvector setup + product embeddings indexed
+- [x] Semantic search (embedding similarity over keyword)
 
 **Deliverable:** All 4 core flows functional (intent search, visual upload, smart wardrobe, outfit builder).
 
@@ -618,8 +618,8 @@ AffiliateClick
 
 **Goal:** The product feels personal.
 
-- [ ] Aesthetic detection from behaviour signals
-- [ ] Adaptive UI theme system (6 aesthetic skins)
+- [x] Aesthetic detection from behaviour signals
+- [x] Adaptive UI theme system (6 aesthetic skins)
 - [ ] Persona dashboard (user can see + edit their detected profile)
 - [ ] Body fit input (quiz + measurements + optional photo — Phase 2 only quiz + measurements)
 - [ ] Fit-adapted results (size/fit signals influence catalog ranking)

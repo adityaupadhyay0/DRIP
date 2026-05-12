@@ -5,7 +5,10 @@ import { getCachedData, setCachedData } from '@/lib/redis';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q')?.toLowerCase() || '';
-  const cacheKey = `search:${query}`;
+  const aesthetic = searchParams.get('aesthetic')?.toLowerCase() || '';
+  const category = searchParams.get('category')?.toLowerCase() || '';
+
+  const cacheKey = `search:${query}:${aesthetic}:${category}`;
 
   // Try to get from cache first
   const cachedResults = await getCachedData(cacheKey);
@@ -13,19 +16,36 @@ export async function GET(request: Request) {
     return NextResponse.json(cachedResults);
   }
 
-  // For Phase 1 MVP, we use the mock seeder and filter in-memory
-  const allProducts = await seedCatalog(200);
+  // Generate mock catalog (5000 items)
+  const allProducts = await seedCatalog(5000);
 
-  const filteredProducts = allProducts.filter(product =>
-    product.name.toLowerCase().includes(query) ||
-    product.brand.toLowerCase().includes(query) ||
-    product.description.toLowerCase().includes(query) ||
-    product.category.toLowerCase().includes(query) ||
-    product.aesthetic_tags.some(tag => tag.toLowerCase().includes(query))
-  );
+  let filteredProducts = allProducts;
+
+  if (query) {
+    filteredProducts = filteredProducts.filter(product =>
+      product.name.toLowerCase().includes(query) ||
+      product.brand.toLowerCase().includes(query) ||
+      product.description.toLowerCase().includes(query)
+    );
+  }
+
+  if (aesthetic && aesthetic !== 'all') {
+    filteredProducts = filteredProducts.filter(product =>
+      product.aesthetic_tags.some(tag => tag.toLowerCase() === aesthetic)
+    );
+  }
+
+  if (category && category !== 'all') {
+    filteredProducts = filteredProducts.filter(product =>
+      product.category.toLowerCase().includes(category)
+    );
+  }
+
+  // Limit results for UI performance
+  const limitedResults = filteredProducts.slice(0, 100);
 
   // Cache the result for 1 hour
-  await setCachedData(cacheKey, filteredProducts);
+  await setCachedData(cacheKey, limitedResults);
 
-  return NextResponse.json(filteredProducts);
+  return NextResponse.json(limitedResults);
 }

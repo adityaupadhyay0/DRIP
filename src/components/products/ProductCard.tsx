@@ -1,3 +1,5 @@
+'use client';
+
 import { CatalogProduct } from '@/types/product';
 import Image from 'next/image';
 
@@ -6,6 +8,21 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const handleAffiliateClick = async () => {
+    try {
+      await fetch('/api/affiliate/click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId: product.id,
+          retailer: product.brand
+        }),
+      });
+    } catch (error) {
+      console.error('Failed to track affiliate click');
+    }
+  };
+
   return (
     <div className="group border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900">
       <div className="relative aspect-[2/3] overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -39,6 +56,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           href={product.affiliate_url}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleAffiliateClick}
           className="block w-full text-center bg-black dark:bg-white text-white dark:text-black text-xs font-bold py-2.5 rounded-lg hover:opacity-80 transition-opacity"
         >
           View on {product.source === 'mock_seed' ? 'Retailer' : product.source}
