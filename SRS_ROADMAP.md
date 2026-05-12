@@ -573,7 +573,7 @@ AffiliateClick
 - [x] Implement Google + Apple OAuth (NextAuth.js)
 - [x] Basic routing: `/`, `/search`, `/wardrobe`, `/outfits`, `/profile`
 - [x] Design system: tokens, typography, dark/light toggle
-- [ ] Deploy to Vercel (CI/CD pipeline live)
+- [x] Deploy to Vercel (CI/CD pipeline live)
 - [x] Set up GitHub repo (public, MIT license, README)
 
 **Deliverable:** Authenticated shell app, deployable, no AI.
@@ -606,7 +606,7 @@ AffiliateClick
 - [x] Visual inspiration upload: image → clothing graph → catalog matches
 - [x] Persona engine v1: collect signals, build profile, influence results
 - [x] Wardrobe upload: photo → vision AI → auto-classified item
-- [ ] Outfit compatibility scoring (does this item match this wardrobe?)
+- [x] Outfit compatibility scoring (does this item match this wardrobe?)
 - [x] pgvector setup + product embeddings indexed
 - [x] Semantic search (embedding similarity over keyword)
 
@@ -635,13 +635,13 @@ AffiliateClick
 
 **Goal:** Production-quality. Community-ready.
 
-- [ ] Performance audit (Core Web Vitals, image optimization)
-- [ ] Accessibility audit (WCAG 2.1 AA)
-- [ ] Full GDPR compliance (data export, deletion, consent flows)
-- [ ] Self-hosted Docker deployment (docker-compose.yml)
-- [ ] Contributor documentation (CONTRIBUTING.md, architecture docs)
-- [ ] API documentation (OpenAPI spec)
-- [ ] Affiliate revenue dashboard (founder-only internal view)
+- [x] Performance audit (Core Web Vitals, image optimization)
+- [x] Accessibility audit (WCAG 2.1 AA)
+- [x] Full GDPR compliance (data export, deletion, consent flows)
+- [x] Self-hosted Docker deployment (docker-compose.yml)
+- [x] Contributor documentation (CONTRIBUTING.md, architecture docs)
+- [x] API documentation (OpenAPI spec)
+- [x] Affiliate revenue dashboard (founder-only internal view)
 - [ ] Open source launch: Product Hunt + Hacker News + GitHub
 
 **Deliverable:** Public v1.0 launch. GitHub stars begin accumulating.

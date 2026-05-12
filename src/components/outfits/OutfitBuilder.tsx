@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Sparkles, Save, RotateCcw, LayoutGrid } from 'lucide-react';
+import { Plus, Sparkles, Save, RotateCcw, LayoutGrid, Loader2 } from 'lucide-react';
+import ProductCard from '../products/ProductCard';
 
 export default function OutfitBuilder() {
   const [slots, setSlots] = useState([
@@ -10,6 +11,30 @@ export default function OutfitBuilder() {
     { id: 'footwear', name: 'Footwear', item: null },
     { id: 'outerwear', name: 'Outerwear', item: null },
   ]);
+  const [loading, setLoading] = useState(false);
+
+  const handleAIComplete = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/ai/search?q=minimalist summer outfit');
+      const data = await res.json();
+
+      // Map AI results to slots
+      const newSlots = slots.map(slot => {
+        const match = data.outfit.find((o: any) => o.slot.category.toLowerCase().includes(slot.id));
+        return {
+          ...slot,
+          item: match?.products[0] || null
+        };
+      });
+
+      setSlots(newSlots);
+    } catch (error) {
+      console.error('AI completion failed');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -20,22 +45,31 @@ export default function OutfitBuilder() {
             {slots.map((slot) => (
               <div
                 key={slot.id}
-                className="aspect-[3/4] border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-[2rem] flex flex-col items-center justify-center relative group hover:border-black dark:hover:border-white transition-all bg-white dark:bg-black shadow-sm"
+                className="aspect-[3/4] border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-[2rem] flex flex-col items-center justify-center relative group hover:border-black dark:hover:border-white transition-all bg-white dark:bg-black shadow-sm overflow-hidden"
               >
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-gray-50 dark:bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Plus size={24} className="text-gray-400" />
+                {slot.item ? (
+                  <div className="p-4 w-full h-full">
+                    <ProductCard product={slot.item as any} />
                   </div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{slot.name}</p>
-                </div>
-                <button className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" aria-label={`Add ${slot.name}`} />
+                ) : (
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-gray-50 dark:bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Plus size={24} className="text-gray-400" />
+                    </div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{slot.name}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
           <div className="absolute bottom-8 right-8 flex gap-3">
-             <button className="bg-black dark:bg-white text-white dark:text-black p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center gap-2 font-bold px-6">
-               <Sparkles size={20} />
+             <button
+               onClick={handleAIComplete}
+               disabled={loading}
+               className="bg-black dark:bg-white text-white dark:text-black p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center gap-2 font-bold px-6 disabled:opacity-50"
+             >
+               {loading ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
                AI Complete
              </button>
           </div>
@@ -55,7 +89,10 @@ export default function OutfitBuilder() {
               <span>Save Outfit</span>
               <Save size={18} />
             </button>
-            <button className="w-full flex items-center justify-between p-4 rounded-2xl border border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all font-bold">
+            <button
+              onClick={() => setSlots(slots.map(s => ({ ...s, item: null })))}
+              className="w-full flex items-center justify-between p-4 rounded-2xl border border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all font-bold"
+            >
               <span>Clear Canvas</span>
               <RotateCcw size={18} />
             </button>
